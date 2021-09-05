@@ -1,2 +1,2 @@
 # phonebook-spring-app
-This Application represents a simple phonebook api for creating and searching a phonebook using API endpoints
+This Application is just a modified version of the phonebook app, built around Docker and GitHub Actions with Docker
