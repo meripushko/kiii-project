@@ -25,8 +25,8 @@ spec:
         io.kompose.service: back
     spec:
       containers:
-        - image: simeon/phonebook-back
-          name: phonebook-back
+        - image: 1212999/kiii-project
+          name: phonebook
           ports:
             - containerPort: 8080
           resources: {}
