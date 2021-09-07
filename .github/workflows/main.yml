@@ -48,3 +48,19 @@ jobs:
         with:
           push: true
           tags: 1212999/kiii-project:latest
+          
+  deployment:
+    runs-on: 'ubuntu-latest'
+    steps:
+      - uses: actions/checkout@v1
+      - name: Prep helm chart
+        run: |
+          mv ./.helm/app/Chart.yaml ./.helm/app/Chart.old.yaml &&
+          cat ./.helm/app/Chart.old.yaml | grep -v appVersion > ./.helm/app/Chart.yaml &&
+          echo -e "\r\nappVersion: v${GITHUB_REF##*/}\r\n" >> ./.helm/app/Chart.yaml &&
+          cat ./.helm/app/Chart.yaml
+      - name: Deploy
+        uses: WyriHaximus/github-action-helm3@v2
+        with:
+          exec: helm upgrade APP_NAME ./.helm/app/ --install --wait --atomic --namespace=APP_NAMESPACE
+          kubeconfig: '${{ secrets.KUBECONFIG }}'
