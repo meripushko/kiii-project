@@ -49,19 +49,15 @@ jobs:
           push: true
           tags: 1212999/kiii-project:latest
           
-  helm-lint:
-   name: Helm lint and release
+  helm-release:
+   name: Helm release
    runs-on: ubuntu-latest
    needs: build
  
    steps:
      - uses: actions/checkout@v2
-     - name: Helm Lint
-       uses: WyriHaximus/github-action-helm3@v2
-       with:
-         exec: helm lint ./helm
      - name: Helm install
        uses: WyriHaximus/github-action-helm3@v2
        with:
-         exec: helm upgrade --install phonebook ./helm
+         exec: helm upgrade --install phonebook ./helm/app
          kubeconfig: '${{ secrets.KUBECONFIG }}'
