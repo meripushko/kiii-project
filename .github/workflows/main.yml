@@ -50,6 +50,7 @@ jobs:
           tags: 1212999/kiii-project:latest
           
   deployment:
+    needs: build
     runs-on: 'ubuntu-latest'
     steps:
       - uses: actions/checkout@v1
